@@ -137,8 +137,10 @@ namespace bai3.Controllers
                 return RedirectToAction(nameof(Index));
             }
             // Nếu dữ liệu không hợp lệ, hiển thị lại form với thông báo lỗi
+            model.Menus = _context.Menus.ToList(); // Đảm bảo danh sách menu được truyền lại khi hiển thị lại form
             return View(model);
         }
+
 
         public async Task<IActionResult> _MenuPartial()
         {

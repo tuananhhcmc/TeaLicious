@@ -113,10 +113,10 @@ app.UseEndpoints(endpoints =>
      pattern: "san-pham/{slug}-{id}",
      defaults: new { controller = "Product", action = "ProdDetail" });
 
-    _=endpoints.MapControllerRoute(
-       name: "them-san-pham",
-       pattern: "them-san-pham",
-       defaults: new { controller = "Product", action = "CateProd" });
+    //_=endpoints.MapControllerRoute(
+    //   name: "them-san-pham",
+    //   pattern: "them-san-pham",
+    //   defaults: new { controller = "Product", action = "CateProd" });
 
     _ =endpoints.MapControllerRoute(
      name: "chuong-trinh",

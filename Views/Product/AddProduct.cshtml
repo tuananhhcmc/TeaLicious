@@ -1,44 +1,45 @@
 ﻿@model bai3.ViewModels.ProductViewModel
 
 <h2>Thêm Sản Phẩm Mới</h2>
-<form asp-action="AddProduct" asp-controller="Product" method="post">
+<form asp-action="AddProduct" asp-controller="Product" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
     <div class="form-group">
         <label for="name">Tên Sản Phẩm:</label>
-        <input type="text" class="form-control" id="name" name="Prods.NamePro" required>
+        <input type="text" class="form-control" id="name" name="NamePro" required>
     </div>
     <div class="form-group">
         <label for="nums">Số Lượng:</label>
-        <input type="number" class="form-control" id="nums" name="Prods.Nums">
+        <input type="number" class="form-control" id="nums" name="Nums">
     </div>
     <div class="form-group">
         <label for="price">Giá Sản Phẩm:</label>
-        <input type="number" class="form-control" id="price" name="Prods.Price" required>
+        <input type="number" class="form-control" id="price" name="Price" required>
     </div>
     <div class="form-group">
         <label for="detail">Chi Tiết:</label>
-        <textarea class="form-control" id="detail" name="Prods.Detail" rows="3"></textarea>
+        <textarea class="form-control" id="detail" name="Detail" rows="3"></textarea>
     </div>
     <div class="form-group">
-        <label for="img1">Link Hình Ảnh 1:</label>
-        <input type="text" class="form-control" id="img1" name="Prods.Img1">
+        <label for="img1">Hình Ảnh 1:</label>
+        <input type="file" class="form-control-file" id="img1" name="Img1">
     </div>
+
     <div class="form-group">
         <label for="order">Thứ Tự:</label>
-        <input type="number" class="form-control" id="order" name="Prods.Order">
+        <input type="number" class="form-control" id="order" name="Order">
     </div>
     <div class="form-group">
         <label for="link">Link:</label>
-        <input type="text" class="form-control" id="link" name="Prods.Link">
+        <input type="text" class="form-control" id="link" name="Link">
     </div>
     <div class="form-group">
         <label for="hide">Ẩn:</label>
-        <input type="number" class="form-control" id="hide" name="Prods.Hide">
+        <input type="number" class="form-control" id="hide" name="Hide">
     </div>
     <div class="form-group">
         <label for="idCat">ID Danh Mục:</label>
-        <input type="number" class="form-control" id="idCat" name="Prods.IdCat">
+        <input type="number" class="form-control" id="idCat" name="IdCat">
     </div>
     <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
 </form>

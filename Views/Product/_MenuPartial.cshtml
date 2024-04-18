@@ -11,10 +11,10 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                @foreach (var item in Model.Menus)
+                @* @foreach (var item in Model.Menus)
                 {
                     <li><a href="/@item.Link">@item.Title</a></li>
-                }
+                } *@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (User.Identity.IsAuthenticated)
