@@ -103,16 +103,6 @@ app.UseEndpoints(endpoints =>
      pattern: "dang-xuat",
      defaults: new { controller = "User", action = "Logout" });
 
-	
-
-    _=endpoints.MapControllerRoute(
-     name: "them-gio-hang",
-     pattern: "them-gio-hang",
-     defaults: new { controller = "Cart", action = "AddItem" });
-
-  
-
-	
     _=endpoints.MapControllerRoute(
      name: "the-loai-san-pham",
      pattern: "{slug}-{id}",
@@ -122,26 +112,16 @@ app.UseEndpoints(endpoints =>
     name: "chi-tiet-san-pham",
      pattern: "san-pham/{slug}-{id}",
      defaults: new { controller = "Product", action = "ProdDetail" });
-    
+
     _=endpoints.MapControllerRoute(
+       name: "them-san-pham",
+       pattern: "them-san-pham",
+       defaults: new { controller = "Product", action = "CateProd" });
+
+    _ =endpoints.MapControllerRoute(
      name: "chuong-trinh",
      pattern: "chuong-trinh/{slug}",
      defaults: new { controller = "Product", action = "Index" });
-
-    // Các route cho phần quản trị
-    _=endpoints.MapControllerRoute(
-        name: "admin-default",
-        pattern: "admin/{controller=Admin}/{action=Index}/{id?}");
-
-    _=endpoints.MapControllerRoute(
-        name: "admin-logout",
-        pattern: "admin/logout",
-        defaults: new { controller = "Admin", action = "Logout" });
-
-    _=endpoints.MapControllerRoute(
-        name: "admin-product",
-        pattern: "admin/product",
-        defaults: new { controller = "Admin", action = "Product" });
 
     _ =app.MapControllerRoute(
 	name: "default",

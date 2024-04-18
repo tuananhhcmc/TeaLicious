@@ -72,7 +72,7 @@ namespace bai3.Controllers
 			var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>
 		   m.Order).ToListAsync();
 			var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>
-		   m.Order).Take(2).ToListAsync();
+		   m.Order).Take(5).ToListAsync();
 			var prods = await _context.Products.Where(m => m.Link == slug && m.IdPro ==
 		   id).ToListAsync();
 			if (prods == null)
@@ -91,7 +91,56 @@ namespace bai3.Controllers
 			};
 			return View(viewModel);
 		}
-		public async Task<IActionResult> _MenuPartial()
+        public IActionResult DeleteProduct(int id)
+        {
+            try
+            {
+                // Tìm sản phẩm cần xóa trong danh sách
+                var productToDelete = _context.Products.Find(id);
+
+                // Kiểm tra xem sản phẩm có tồn tại không
+                if (productToDelete == null)
+                {
+                    return NotFound();
+                }
+
+                // Xóa sản phẩm khỏi danh sách
+                _context.Products.Remove(productToDelete);
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+        public IActionResult AddProduct()
+        {
+            var model = new ProductViewModel();
+            model.Menus = _context.Menus.ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddProduct(ProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var product in model.Prods)
+                {
+                    // Thêm từng sản phẩm từ danh sách vào cơ sở dữ liệu
+                    _context.Products.Add(product);
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            // Nếu dữ liệu không hợp lệ, hiển thị lại form với thông báo lỗi
+            return View(model);
+        }
+
+        public async Task<IActionResult> _MenuPartial()
         {
             return PartialView();
         }

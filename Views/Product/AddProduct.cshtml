@@ -1,0 +1,44 @@
+﻿@model bai3.ViewModels.ProductViewModel
+
+<h2>Thêm Sản Phẩm Mới</h2>
+<form asp-action="AddProduct" asp-controller="Product" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="name">Tên Sản Phẩm:</label>
+        <input type="text" class="form-control" id="name" name="Prods.NamePro" required>
+    </div>
+    <div class="form-group">
+        <label for="nums">Số Lượng:</label>
+        <input type="number" class="form-control" id="nums" name="Prods.Nums">
+    </div>
+    <div class="form-group">
+        <label for="price">Giá Sản Phẩm:</label>
+        <input type="number" class="form-control" id="price" name="Prods.Price" required>
+    </div>
+    <div class="form-group">
+        <label for="detail">Chi Tiết:</label>
+        <textarea class="form-control" id="detail" name="Prods.Detail" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="img1">Link Hình Ảnh 1:</label>
+        <input type="text" class="form-control" id="img1" name="Prods.Img1">
+    </div>
+    <div class="form-group">
+        <label for="order">Thứ Tự:</label>
+        <input type="number" class="form-control" id="order" name="Prods.Order">
+    </div>
+    <div class="form-group">
+        <label for="link">Link:</label>
+        <input type="text" class="form-control" id="link" name="Prods.Link">
+    </div>
+    <div class="form-group">
+        <label for="hide">Ẩn:</label>
+        <input type="number" class="form-control" id="hide" name="Prods.Hide">
+    </div>
+    <div class="form-group">
+        <label for="idCat">ID Danh Mục:</label>
+        <input type="number" class="form-control" id="idCat" name="Prods.IdCat">
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
+</form>

@@ -1,0 +1,15 @@
+﻿@model bai3.Models.Product
+
+@{
+    ViewData["Title"] = "Xác nhận Xóa Sản Phẩm";
+}
+
+<h2>Xác nhận Xóa Sản Phẩm</h2>
+<p>Bạn có chắc chắn muốn xóa sản phẩm "@Model.NamePro" không?</p>
+<form asp-action="DeleteProduct" method="post">
+    <input type="hidden" asp-for="IdPro" />
+    <div>
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-default">Hủy</a>
+    </div>
+</form>

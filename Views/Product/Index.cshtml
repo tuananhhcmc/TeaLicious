@@ -1,20 +1,36 @@
-﻿@model bai3.ViewModels.ProductViewModel
+﻿@using System.Security.Claims
+@model bai3.ViewModels.ProductViewModel
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <div class="panel panel-primary">
-    <div class="panel-heading panel-heading-prod"><i class="fa fa-spinner fa-spin"></i> Tất cả sản phẩm</div>
+    <div class="panel-heading panel-heading-prod">
+        <i class="fa fa-spinner fa-spin"></i> Tất cả sản phẩm
+        @if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role)?.Value == "1")
+        {
+            <a asp-action="AddProduct" asp-controller="Product" class="btn btn-success">Thêm Sản Phẩm</a>
+        }
+    </div>
+
     <div class="panel-body">
         <div class="row">
             @foreach (var item in Model.Prods)
             {
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <img src="~/images/products/@item.Img1" class="img-rounded"
-                             alt="@item.NamePro">
+                        <img src="~/images/products/@item.Img1" class="img-rounded" alt="@item.NamePro">
                         <div class="caption">
                             <h4>@item.NamePro</h4>
                             <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
                             <p>
-                                <a href="san-pham/@item.Link-@item.IdPro" class="btn btn-info" role="button"><i class="fa fa-rocket"></i> Chi tiết</a>
+                                @if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role)?.Value == "1")
+                                {
+                                    <a href="@Url.Action("DeleteProduct", "Product", new { id = item.IdPro })" class="btn btn-danger" role="button" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');"><i class="fa fa-trash"></i> Xóa</a>
+                                }
+                                else
+                                {
+                                    <a href="san-pham/@item.Link-@item.IdPro" class="btn btn-info" role="button"><i class="fa fa-rocket"></i> Chi tiết</a>
+                                }
                             </p>
                         </div>
                     </div>
