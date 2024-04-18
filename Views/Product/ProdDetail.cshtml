@@ -1,0 +1,97 @@
+﻿@model bai3.ViewModels.ProductViewModel
+@foreach (var item in Model.Prods)
+{
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<img id="mainImage" src="~/images/products/@item.Img1" alt="Main
+Image" class="img-responsive main-image">
+				</div>
+			</div>
+			@* <div class="row">
+				<div class="col-md-6 ">
+					<img src="~/images/products/@item.Img2" alt="Thumbnail 1"
+						 class="img-responsive thumbnail" onclick="changeImage(this)">
+				</div>
+				<div class="col-md-6">
+					<img src="~/images/products/@item.Img3" alt="Thumbnail 2"
+						 class="img-responsive thumbnail" onclick="changeImage(this)">
+				</div>
+			</div> *@
+		</div>
+		<div class="col-md-6">
+			<h2>@item.NamePro</h2>
+			<h4>
+				Giá gốc: <strike style="color:red;">
+					@string.Format("{0:N0}",
+										(float)item.Price * 1.5) VNĐ
+				</strike>
+			</h4>
+			<h4>
+				Giá giảm sốc: <i style="font-weight: bold; color:
+green;">@string.Format("{0:N0}", (float)item.Price) VNĐ</i>
+			</h4>
+			<h4>Các lựa chọn hiện có :</h4>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="col-md-4 control-label">Mức độ đá:</label>
+					<div class="col-md-8">
+						<select class="form-control">
+							 <option>0% đá</option>
+							 <option>30% đá</option>
+							 <option>50% đá</option>
+							 <option>70% đá</option>
+							 <option>100% đá</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Mức độ đường:</label>
+					<div class="col-md-8">
+						<select class="form-control">
+							<option>0% đường</option>
+							<option>30% đường</option>
+							<option>50% đường</option>
+							<option>70% đường</option>
+							<option>100% đường</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Số lượng:</label>
+					<div class="col-md-8">
+						<input type="number" id="quantity_@item.IdPro" name="quantity" min="1" max="100" step="1">
+						<a class="btn btn-danger" href="javascript:void(0);" onclick="addToCart(@item.IdPro)">
+						<i class="fa fa-spin fa-spinner"></i> Mua
+						ngay
+						</a>
+					</div>
+				</div>
+				
+
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<h4>Thông tin sản phẩm:</h4>
+		<p style="text-align: justify">
+			@Html.Raw(item.Detail)
+		</p>
+	</div>
+}
+@section scripts {
+	<script>
+		function changeImage(img) {
+			var mainImage = document.getElementById('mainImage');
+			var tempSrc = mainImage.src;
+			mainImage.src = img.src;
+			img.src = tempSrc;
+		}
+		function addToCart(productId) {
+			var quantityInput = document.getElementById('quantity_' + productId);
+			var quantityValue = quantityInput.value;
+			window.location.href = "/them-gio-hang?ProductId=" + productId + "&Quantity=" + quantityValue;
+		}
+	</script>
+}

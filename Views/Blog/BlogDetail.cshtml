@@ -1,0 +1,23 @@
+﻿@model bai3.ViewModels.BlogViewModel
+@foreach (var item in Model.Blogs)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <img src="~/images/blog/@(item.Img)" style="width:300px;height:200px;" class="img-rounded" alt="@item.Title">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <h2>@item.Description</h2>
+        </div>
+    </div>
+    <div class="row">
+        <h4>Thông tin sản phẩm:</h4>
+        <p style="text-align: justify">
+            @Html.Raw(item.Detail)
+        </p>
+    </div>
+}
