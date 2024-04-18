@@ -3,6 +3,8 @@ using bai3.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PagedList;
+using X.PagedList;
 namespace bai3.Controllers
 {
     public class ProductController : Controller
@@ -12,23 +14,32 @@ namespace bai3.Controllers
         {
             _context = context;
         }
-		public async Task<IActionResult> Index()
-		{
-			var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>
-		   m.Order).ToListAsync();
-			var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>
-		   m.Order).Take(5).ToListAsync();
-			var prods = await _context.Products.Where(m => m.Hide == 0).OrderBy(m =>
-		   m.Order).ToListAsync();
-			var viewModel = new ProductViewModel
-			{
-				Menus = menus,
-				Blogs = blogs,
-				Prods = prods,
-			};
-			return View(viewModel);
-		}
-		public async Task<IActionResult> CateProd(string slug, long id)
+        public async Task<IActionResult> Index(int? page)
+        {
+            var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>
+               m.Order).ToListAsync();
+            var blogs = await _context.Blogs.Where(m => m.Hide == 0).OrderBy(m =>
+               m.Order).Take(5).ToListAsync();
+            var prods = await _context.Products.Where(m => m.Hide == 0).OrderBy(m =>
+               m.Order).ToListAsync();
+
+            int pageSize = 3;
+            int pageNumber = page ?? 1; // Nếu page null thì mặc định là trang 1
+
+            var pagedProds = await prods.ToPagedListAsync(pageNumber, pageSize);
+
+            var viewModel = new ProductViewModel
+            {
+                Menus = menus,
+                Blogs = blogs,
+                Prods = pagedProds.ToList(), // Gán danh sách sản phẩm đã phân trang vào viewModel
+            };
+
+            return View(viewModel);
+        }
+
+
+        public async Task<IActionResult> CateProd(string slug, long id)
         {
             var menus = await _context.Menus.Where(m => m.Hide == 0).OrderBy(m =>
            m.Order).ToListAsync();
