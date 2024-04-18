@@ -1,5 +1,5 @@
 ﻿@model bai3.ViewModels.ProductViewModel
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="panel panel-primary">
     <div class="panel-heading panel-heading-prod"><i class="fa fa-spinner fa-spin"></i> Tất cả sản phẩm</div>
     <div class="panel-body">
@@ -24,7 +24,7 @@
     </div>
     <div class="panel-footer text-center">
         <ul class="pagination pagination-centered">
-            <li class="active"><a href="?page=1">1</a></li>
+            <li><a href="?page=1">1</a></li>
             <li><a href="?page=2">2</a></li>
             <li><a href="?page=3">3</a></li>
             <li><a href="?page=4">4</a></li>
@@ -32,3 +32,15 @@
         </ul>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var page = urlParams.get('page');
+        if (page === null) {
+            page = 1; // Mặc định là trang 1 nếu không có tham số page trong URL
+        }
+        $('.pagination li').removeClass('active');
+        $('.pagination li').eq(page - 1).addClass('active');
+    });
+</script>
