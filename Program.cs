@@ -134,11 +134,6 @@ app.UseEndpoints(endpoints =>
         pattern: "admin/{controller=Admin}/{action=Index}/{id?}");
 
     _=endpoints.MapControllerRoute(
-        name: "admin-login",
-        pattern: "admin/login",
-        defaults: new { controller = "Admin", action = "Login" });
-
-    _=endpoints.MapControllerRoute(
         name: "admin-logout",
         pattern: "admin/logout",
         defaults: new { controller = "Admin", action = "Logout" });
@@ -147,11 +142,6 @@ app.UseEndpoints(endpoints =>
         name: "admin-product",
         pattern: "admin/product",
         defaults: new { controller = "Admin", action = "Product" });
-
-    _=endpoints.MapControllerRoute(
-        name: "admin-user",
-        pattern: "admin/user",
-        defaults: new { controller = "Admin", action = "User" });
 
     _ =app.MapControllerRoute(
 	name: "default",
