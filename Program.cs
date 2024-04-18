@@ -1,4 +1,4 @@
-using bai3.Models;
+﻿using bai3.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
 AddCookie(options =>
 {
-	options.Cookie.Name = "PetStoreCookie";
+	options.Cookie.Name = "PhucLongCookie";
 	options.LoginPath = "/User/Login";
 });
 
@@ -128,7 +128,32 @@ app.UseEndpoints(endpoints =>
      pattern: "chuong-trinh/{slug}",
      defaults: new { controller = "Product", action = "Index" });
 
-	_=app.MapControllerRoute(
+    // Các route cho phần quản trị
+    _=endpoints.MapControllerRoute(
+        name: "admin-default",
+        pattern: "admin/{controller=Admin}/{action=Index}/{id?}");
+
+    _=endpoints.MapControllerRoute(
+        name: "admin-login",
+        pattern: "admin/login",
+        defaults: new { controller = "Admin", action = "Login" });
+
+    _=endpoints.MapControllerRoute(
+        name: "admin-logout",
+        pattern: "admin/logout",
+        defaults: new { controller = "Admin", action = "Logout" });
+
+    _=endpoints.MapControllerRoute(
+        name: "admin-product",
+        pattern: "admin/product",
+        defaults: new { controller = "Admin", action = "Product" });
+
+    _=endpoints.MapControllerRoute(
+        name: "admin-user",
+        pattern: "admin/user",
+        defaults: new { controller = "Admin", action = "User" });
+
+    _ =app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 });
